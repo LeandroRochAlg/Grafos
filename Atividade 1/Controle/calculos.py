@@ -2,9 +2,7 @@ import numpy as np
 from Inicialização import matrizes as mt
 from Controle import testes as ts
 
-def calcDensidade(matriz):
-    listaAdj = mt.criaListaAdjacencias(matriz)
-
+def calcDensidadeLista(listaAdj):
     numV = 0
     numE = 0
 
@@ -14,7 +12,7 @@ def calcDensidade(matriz):
             listaAdj[j].pop(0)  #não conta a mesma aresta duas vezes
             numE += 1
 
-    if ts.tipoGrafo(matriz) % 10 > 0:   #Digrafo
+    if ts.tipoGrafoLista(listaAdj) % 10 > 0:   #Digrafo
         densidade = (numE)/(numV*(numV - 1))
     else:
         densidade = (2*numE)/(numV*(numV - 1))
