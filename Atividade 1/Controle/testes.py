@@ -1,9 +1,7 @@
 import numpy as np
 from Inicialização import matrizes as mt
 
-def tipoGrafo(matriz):
-    listaAdj = mt.criaListaAdjacencias(matriz)
-
+def tipoGrafoLista(listaAdj):
     flagS = 0
     flagM = 0
     flagP = 0
@@ -29,12 +27,10 @@ def tipoGrafo(matriz):
 
     return result
 
-def verificaAdjacencia(matriz, vi, vj):
-    listaAdj = mt.criaListaAdjacencias(matriz)
-
+def verificaAdjacenciaLista(listaAdj, vi, vj):
     if vj in listaAdj[vi] or vi in listaAdj[vj]:
-        #print(True)
+        print(True)
         return True
     else:
-        #print(False)
+        print(False)
         return False
