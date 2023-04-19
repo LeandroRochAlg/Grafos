@@ -1,6 +1,11 @@
-import numpy as np
-from Inicialização import matrizes as mt
 from Controle import testes as ts
+
+def calcDensidade(matriz):
+    result = sum([sum(linha) for linha in matriz]) / (len(matriz) * (len(matriz) - 1))
+
+    print(round(result, 3))
+
+    return result
 
 def calcDensidadeLista(listaAdj):
     numV = 0
