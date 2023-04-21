@@ -7,6 +7,6 @@ def salvaTamanhoInstancia(instancia, matriz):
 
     print(string)   #mostra o resultado na tela
 
-    arquivo = open('Grafos/Arquivos/Resultados/' + instancia + '_dimensão', 'a+')
+    arquivo = open('Grafos/Arquivos/Resultados/' + instancia + '_dimensão.txt', 'a+')
     arquivo.writelines(string + '\n')   #salva o resultado em arquivo
     arquivo.close()
