@@ -21,3 +21,19 @@ def criaListaAdjacencias(matriz1):
     #print(listaAdj)
 
     return listaAdj
+
+def warshall(matriz):
+    matrizAlc = np.array(matriz)
+    n, s = matrizAlc.shape
+
+    for k in range(n):
+        for i in range(n):
+            for j in range(n):
+                if matrizAlc[i][j] == 1 or (matrizAlc[i][k] == 1 and matrizAlc[k][j] == 1):
+                    matrizAlc[i][j] = 1
+                else:
+                    matrizAlc[i][j] = matrizAlc[i][j]
+
+    #print(matrizAlc)
+
+    return matrizAlc
