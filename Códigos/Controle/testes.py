@@ -23,7 +23,7 @@ def tipoGrafo(matriz1):
     else:
         result = flagM + flagS
 
-    print(result)
+    #print(result)
 
     return result
 
@@ -49,7 +49,7 @@ def tipoGrafoLista(listaAdj):
     else:
         result = flagM + flagS
 
-    print(result)
+    #print(result)
 
     return result
 
@@ -59,14 +59,35 @@ def verificaAdjacencia(matriz, vi, vj):
     else:
         result = False
 
-    print(result)
+    #print(result)
 
     return result
 
 def verificaAdjacenciaLista(listaAdj, vi, vj):
     if vj in listaAdj[vi] or vi in listaAdj[vj]:
-        print(True)
+        #print(True)
         return True
     else:
-        print(False)
+        #print(False)
         return False
+    
+def caminhoEuleriano(matriz):
+    matrizNp = np.array(matriz)
+    n, s = matrizNp.shape
+    total = 0
+    i = 0
+
+    while total <= 2 and i < n:
+        grau = np.sum(matrizNp[i])
+        if np.sum(matrizNp[i]) % 2 != 0:
+            total += 1
+        i += 1
+
+    if total > 2:
+        ret = False
+    else:
+        ret = True
+
+    #print(ret)
+
+    return ret
