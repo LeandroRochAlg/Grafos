@@ -40,17 +40,17 @@ def DFSi(listaAdj, inicio):
     tamanhoLista = len(listaAdj)
     cont = -1
 
-    while len(analisado) < tamanhoLista:
-        if inicio not in analisado:
+    while len(analisado) < tamanhoLista:    #deve analisar todos os vértices
+        if inicio not in analisado: #marca o vértice como analisado caso não tenha sido marcado ainda
             analisado.append(inicio)
         
-        for i in range(tamanhoLista):
-            if i in listaAdj[inicio] and i not in analisado:
-                inicio = i
+        for i in range(tamanhoLista):   #varre todos os valores possíveis para serem adjacentes de um vértice
+            if i in listaAdj[inicio] and i not in analisado:    #o número é adjacente e não foi analisado
+                inicio = i  #pula para o próximo vértice
                 analisado.append(i)
                 break
-            elif i == tamanhoLista - 1:
+            elif i == tamanhoLista - 1: #caso seja o último elemento possível e nada foi feito ainda
                 cont += 1
-                inicio = cont
+                inicio = cont   #pula para o próximo vértice, começando do 0
 
     return analisado
