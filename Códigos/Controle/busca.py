@@ -18,17 +18,15 @@ def BFS(listaAdj, inicio):
     for i in listaAdj:
         if len(listaAdj[i]) == 0:
             analisado.append(i)
-
-    #print(analisado)
-
+            
     return analisado
 
 def DFSr(listaAdj, inicio):
     analisado = []
 
     DFS_recursivo(listaAdj, inicio, analisado)
-
-    print(analisado)
+    
+    return analisado
 
 def DFS_recursivo(listaAdj, inicio, analisado):
     analisado.append(inicio)
@@ -37,23 +35,22 @@ def DFS_recursivo(listaAdj, inicio, analisado):
         if adj not in analisado:
             DFS_recursivo(listaAdj, adj, analisado)
 
-def DFS(listaAdj, inicio):
+def DFSi(listaAdj, inicio):
     analisado = []
+    tamanhoLista = len(listaAdj)
     cont = -1
 
-    while len(analisado) < len(listaAdj):
+    while len(analisado) < tamanhoLista:
         if inicio not in analisado:
             analisado.append(inicio)
         
-        for i in range(len(listaAdj)):
+        for i in range(tamanhoLista):
             if i in listaAdj[inicio] and i not in analisado:
                 inicio = i
                 analisado.append(i)
                 break
-            elif i == len(listaAdj) - 1:
+            elif i == tamanhoLista - 1:
                 cont += 1
                 inicio = cont
-
-    #print(analisado)
 
     return analisado
