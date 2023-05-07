@@ -1,6 +1,6 @@
 import sys
 from Inicialização import matrizes as mt, salva as sv
-from Controle import testes as ts, calculos as cl, manejo as mj
+from Controle import testes as ts, calculos as cl, manejo as mj, busca as fs
 
 
 def main(instancia):
