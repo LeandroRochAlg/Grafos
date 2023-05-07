@@ -37,20 +37,31 @@ def DFS_recursivo(listaAdj, inicio, analisado):
 
 def DFSi(listaAdj, inicio):
     analisado = []
+    aux = []    #pilha de vértices
     tamanhoLista = len(listaAdj)
-    cont = -1
+    conti = 0
+    cont = 0
+
+    aux.append(inicio)
 
     while len(analisado) < tamanhoLista:    #deve analisar todos os vértices
-        if inicio not in analisado: #marca o vértice como analisado caso não tenha sido marcado ainda
-            analisado.append(inicio)
-        
-        for i in range(tamanhoLista):   #varre todos os valores possíveis para serem adjacentes de um vértice
-            if i in listaAdj[inicio] and i not in analisado:    #o número é adjacente e não foi analisado
-                inicio = i  #pula para o próximo vértice
-                analisado.append(i)
-                break
-            elif i == tamanhoLista - 1: #caso seja o último elemento possível e nada foi feito ainda
-                cont += 1
-                inicio = cont   #pula para o próximo vértice, começando do 0
+        while len(aux) - conti >= 0:
+            if inicio not in analisado: #marca o vértice como analisado caso não tenha sido marcado ainda
+                analisado.append(inicio)
+
+            for i in range(tamanhoLista):   #varre todos os valores possíveis para serem adjacentes de um vértice
+                if i in listaAdj[inicio] and i not in analisado:    #o número é adjacente e não foi analisado
+                    inicio = i  #pula para o próximo vértice
+                    analisado.append(i)
+                    aux.append(i)
+                    conti = 0
+                    break
+                elif i == tamanhoLista - 1: #caso seja o último elemento possível e nada foi feito ainda
+                    conti += 1
+                    if len(aux) - conti >= 0:
+                        inicio = aux[len(aux) - conti]
+
+        inicio = cont
+        cont += 1    #reinicia o contador da pilha
 
     return analisado
