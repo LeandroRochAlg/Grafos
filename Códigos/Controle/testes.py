@@ -1,4 +1,5 @@
 import numpy as np
+import busca as bs
 
 def tipoGrafo(matriz1):
     flagS = 0
@@ -95,6 +96,23 @@ def classificaArestas(listaAdj, inicio = None):
     if inicio == None:
         inicio = 0
 
+    tempo = [1]
+    tempo[0] = 0
+    cor = ['branco' for i in range(len(listaAdj))]
+    tipoAresta = [[' ' for i in range(len(listaAdj))] for j in range(len(listaAdj))]
+    tempoD = [0 for i in range(len(listaAdj))]
+    tempoT = [0 for i in range(len(listaAdj))]
+
+    for vertice in listaAdj:
+        if cor[vertice] == 'branco':
+            bs.visitaDFS(vertice, listaAdj, cor, tipoAresta, tempoD, tempoT, tempo, True)
+
+    return tipoAresta
+
+def temposVertices(listaAdj, inicio = None):
+    if inicio == None:
+        inicio = 0
+
     listaTempo = {}
     tempo = [1]
     tempo[0] = 0
@@ -105,36 +123,11 @@ def classificaArestas(listaAdj, inicio = None):
 
     for vertice in listaAdj:
         if cor[vertice] == 'branco':
-            visitaDFS(vertice, listaAdj, cor, tipoAresta, tempoD, tempoT, tempo)
+            bs.visitaDFS(vertice, listaAdj, cor, tipoAresta, tempoD, tempoT, tempo, False)
 
     for vertice in listaAdj:
         listaTempo[vertice] = str(tempoD[vertice]) + '/' + str(tempoT[vertice])
 
     print(listaTempo)
 
-    return tipoAresta
-
-def visitaDFS(vertice, listaAdj, cor, tipoAresta, tempoD, tempoT, tempo):
-    cor[vertice] = 'cinza'
-    tempo[0] += 1
-    tempoD[vertice] = tempo[0]
-
-    for adj in listaAdj[vertice]:
-        if cor[adj] == 'branco':
-            tipoAresta[vertice][adj] = 'Tree'
-            print(vertice, adj, 'Tree')
-            visitaDFS(adj, listaAdj, cor, tipoAresta, tempoD, tempoT, tempo)
-        elif cor[adj] == 'cinza':
-            tipoAresta[vertice][adj] = 'Back'
-            print(vertice, adj, 'Back')
-        else:
-            if tempoD[vertice] < tempoD[adj]:
-                tipoAresta[vertice][adj] = 'Forward'
-                print(vertice, adj, 'Forward')
-            else:
-                tipoAresta[vertice][adj] = 'Cross'
-                print(vertice, adj, 'Cross')
-    
-    cor[vertice] = 'preto'
-    tempo[0] += 1
-    tempoT[vertice] = tempo[0]
+    return tempoD, tempoT
