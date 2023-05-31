@@ -66,7 +66,7 @@ def DFSi(listaAdj, inicio):
 
     return analisado
 
-def visitaDFS(vertice, listaAdj, cor, tipoAresta, tempoD, tempoT, tempo, classifica):
+def visitaDFS(vertice, listaAdj, cor, tipoAresta, tempoD, tempoT, tempo, classifica, ordenacaoTop):
     cor[vertice] = 'cinza'
     tempo[0] += 1
     tempoD[vertice] = tempo[0]
@@ -76,7 +76,7 @@ def visitaDFS(vertice, listaAdj, cor, tipoAresta, tempoD, tempoT, tempo, classif
             tipoAresta[vertice][adj] = 'Tree'
             if classifica:
                 print(vertice, adj, 'Tree')
-            visitaDFS(adj, listaAdj, cor, tipoAresta, tempoD, tempoT, tempo, classifica)
+            visitaDFS(adj, listaAdj, cor, tipoAresta, tempoD, tempoT, tempo, classifica, ordenacaoTop)
         elif cor[adj] == 'cinza':
             tipoAresta[vertice][adj] = 'Back'
             if classifica:
@@ -94,3 +94,4 @@ def visitaDFS(vertice, listaAdj, cor, tipoAresta, tempoD, tempoT, tempo, classif
     cor[vertice] = 'preto'
     tempo[0] += 1
     tempoT[vertice] = tempo[0]
+    ordenacaoTop.append(vertice)
