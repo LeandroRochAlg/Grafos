@@ -96,18 +96,20 @@ def classificaArestas(listaAdj, inicio = None):
     if inicio == None:
         inicio = 0
 
+    tamLista = len(listaAdj)
     tempo = [1]
     tempo[0] = 0
-    cor = ['branco' for i in range(len(listaAdj))]
-    tipoAresta = [[' ' for i in range(len(listaAdj))] for j in range(len(listaAdj))]
-    tempoD = [0 for i in range(len(listaAdj))]
-    tempoT = [0 for i in range(len(listaAdj))]
+    cor = ['branco' for i in range(tamLista)]
+    tipoAresta = [[' ' for i in range(tamLista)] for j in range(tamLista)]
+    tempoD = [0 for i in range(tamLista)]
+    tempoT = [0 for i in range(tamLista)]
+    ordenacaoTop = []
 
-    bs.visitaDFS(inicio, listaAdj, cor, tipoAresta, tempoD, tempoT, tempo, True)
+    bs.visitaDFS(inicio, listaAdj, cor, tipoAresta, tempoD, tempoT, tempo, True, ordenacaoTop)
 
     for vertice in listaAdj:
         if cor[vertice] == 'branco':
-            bs.visitaDFS(vertice, listaAdj, cor, tipoAresta, tempoD, tempoT, tempo, True)
+            bs.visitaDFS(vertice, listaAdj, cor, tipoAresta, tempoD, tempoT, tempo, True, ordenacaoTop)
 
     return tipoAresta
 
@@ -115,19 +117,21 @@ def temposVertices(listaAdj, inicio = None):
     if inicio == None:
         inicio = 0
 
+    tamLista = len(listaAdj)
     listaTempo = {}
     tempo = [1]
     tempo[0] = 0
-    cor = ['branco' for i in range(len(listaAdj))]
-    tipoAresta = [[' ' for i in range(len(listaAdj))] for j in range(len(listaAdj))]
-    tempoD = [0 for i in range(len(listaAdj))]
-    tempoT = [0 for i in range(len(listaAdj))]
+    cor = ['branco' for i in range(tamLista)]
+    tipoAresta = [[' ' for i in range(tamLista)] for j in range(tamLista)]
+    tempoD = [0 for i in range(tamLista)]
+    tempoT = [0 for i in range(tamLista)]
+    ordenacaoTop = []
 
-    bs.visitaDFS(inicio, listaAdj, cor, tipoAresta, tempoD, tempoT, tempo, False)
+    bs.visitaDFS(inicio, listaAdj, cor, tipoAresta, tempoD, tempoT, tempo, False, ordenacaoTop)
 
     for vertice in listaAdj:
         if cor[vertice] == 'branco':
-            bs.visitaDFS(vertice, listaAdj, cor, tipoAresta, tempoD, tempoT, tempo, False)
+            bs.visitaDFS(vertice, listaAdj, cor, tipoAresta, tempoD, tempoT, tempo, False, ordenacaoTop)
 
     for vertice in listaAdj:
         listaTempo[vertice] = str(tempoD[vertice]) + '/' + str(tempoT[vertice])
@@ -137,16 +141,18 @@ def temposVertices(listaAdj, inicio = None):
     return tempoD, tempoT
 
 def verificaDAG(listaAdj):
+    tamLista = len(listaAdj)
     tempo = [1]
     tempo[0] = 0
-    cor = ['branco' for i in range(len(listaAdj))]
-    tipoAresta = [[' ' for i in range(len(listaAdj))] for j in range(len(listaAdj))]
-    tempoD = [0 for i in range(len(listaAdj))]
-    tempoT = [0 for i in range(len(listaAdj))]
+    cor = ['branco' for i in range(tamLista)]
+    tipoAresta = [[' ' for i in range(tamLista)] for j in range(tamLista)]
+    tempoD = [0 for i in range(tamLista)]
+    tempoT = [0 for i in range(tamLista)]
+    ordenacaoTop = []
 
     for vertice in listaAdj:
         if cor[vertice] == 'branco':
-            bs.visitaDFS(vertice, listaAdj, cor, tipoAresta, tempoD, tempoT, tempo, False)
+            bs.visitaDFS(vertice, listaAdj, cor, tipoAresta, tempoD, tempoT, tempo, False, ordenacaoTop)
 
     for linha in tipoAresta:
         if 'Back' in linha:
@@ -155,3 +161,21 @@ def verificaDAG(listaAdj):
 
     print("DAG")
     return True
+
+def ordenacaoTopologica(listaAdj):
+    tamLista = len(listaAdj)
+    tempo = [1]
+    tempo[0] = 0
+    cor = ['branco' for i in range(tamLista)]
+    tipoAresta = [[' ' for i in range(tamLista)] for j in range(tamLista)]
+    tempoD = [0 for i in range(tamLista)]
+    tempoT = [0 for i in range(tamLista)]
+    ordenacaoTop = []
+
+    for vertice in listaAdj:
+        if cor[vertice] == 'branco':
+            bs.visitaDFS(vertice, listaAdj, cor, tipoAresta, tempoD, tempoT, tempo, False, ordenacaoTop)
+
+    ordenacaoTop = ordenacaoTop[::-1]   #inverte
+
+    return ordenacaoTop
