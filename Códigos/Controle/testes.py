@@ -103,6 +103,8 @@ def classificaArestas(listaAdj, inicio = None):
     tempoD = [0 for i in range(len(listaAdj))]
     tempoT = [0 for i in range(len(listaAdj))]
 
+    bs.visitaDFS(inicio, listaAdj, cor, tipoAresta, tempoD, tempoT, tempo, True)
+
     for vertice in listaAdj:
         if cor[vertice] == 'branco':
             bs.visitaDFS(vertice, listaAdj, cor, tipoAresta, tempoD, tempoT, tempo, True)
@@ -120,6 +122,8 @@ def temposVertices(listaAdj, inicio = None):
     tipoAresta = [[' ' for i in range(len(listaAdj))] for j in range(len(listaAdj))]
     tempoD = [0 for i in range(len(listaAdj))]
     tempoT = [0 for i in range(len(listaAdj))]
+
+    bs.visitaDFS(inicio, listaAdj, cor, tipoAresta, tempoD, tempoT, tempo, False)
 
     for vertice in listaAdj:
         if cor[vertice] == 'branco':
