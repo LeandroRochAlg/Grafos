@@ -135,3 +135,23 @@ def temposVertices(listaAdj, inicio = None):
     print(listaTempo)
 
     return tempoD, tempoT
+
+def verificaDAG(listaAdj):
+    tempo = [1]
+    tempo[0] = 0
+    cor = ['branco' for i in range(len(listaAdj))]
+    tipoAresta = [[' ' for i in range(len(listaAdj))] for j in range(len(listaAdj))]
+    tempoD = [0 for i in range(len(listaAdj))]
+    tempoT = [0 for i in range(len(listaAdj))]
+
+    for vertice in listaAdj:
+        if cor[vertice] == 'branco':
+            bs.visitaDFS(vertice, listaAdj, cor, tipoAresta, tempoD, tempoT, tempo, False)
+
+    for linha in tipoAresta:
+        if 'Back' in linha:
+            print("NÃO DAG")
+            return False
+
+    print("DAG")
+    return True
