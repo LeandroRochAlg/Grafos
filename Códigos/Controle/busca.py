@@ -1,3 +1,5 @@
+import math
+
 def BFS(listaAdj, inicio):
     Q = []
     analisado = []
@@ -95,3 +97,38 @@ def visitaDFS(vertice, listaAdj, cor, tipoAresta, tempoD, tempoT, tempo, classif
     tempo[0] += 1
     tempoT[vertice] = tempo[0]
     ordenacaoTop.append(vertice)
+
+def dijkstra(matriz, vOrigem, vDestino):
+    num_vertices = len(matriz)
+    custo = [math.inf] * num_vertices
+    rota = [-1] * num_vertices
+    custo[vOrigem] = 0
+
+    verAbertos = set(range(num_vertices))
+    verFechados = set()
+
+    while verAbertos:
+        v = min(verAbertos, key=lambda x: custo[x])
+        verAbertos.remove(v)
+        verFechados.add(v)
+
+        if v == vDestino:
+            break
+
+        for j in range(num_vertices):
+            if j not in verFechados and matriz[v][j] != -1:
+                aresta = matriz[v][j]
+                dist = custo[v] + aresta
+                if dist < custo[j]:
+                    custo[j] = dist
+                    rota[j] = v
+
+    caminho = []
+    atual = vDestino
+    while atual != -1:
+        caminho.insert(0, atual)
+        atual = rota[atual]
+
+    custo_rota = custo[vDestino]
+
+    return caminho, custo_rota
