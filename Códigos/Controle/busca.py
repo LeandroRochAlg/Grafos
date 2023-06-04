@@ -129,6 +129,55 @@ def dijkstra(matriz, vOrigem, vDestino):
         caminho.insert(0, atual)
         atual = rota[atual]
 
-    custo_rota = custo[vDestino]
+    return caminho, custo[vDestino]
 
-    return caminho, custo_rota
+def bellmanFord(matriz, vOrigem, vDestino):
+    tam = len(matriz)
+    custo = [math.inf] * tam
+    custo[vOrigem] = 0
+    rota = [-1] * tam
+
+    for _ in range(tam - 1):
+        for v in range(tam):
+            for u in range(tam):
+                if matriz[v][u] != -1:
+                    wvu = matriz[v][u]
+                    if custo[v] + wvu < custo[u]:
+                        custo[u] = custo[v] + wvu
+                        rota[u] = v
+
+    for v in range(tam):
+        for u in range(tam):
+            if matriz[v][u] != -1:
+                wvu = matriz[v][u]
+                if custo[v] + wvu < custo[u]:
+                    return False
+
+    caminho = []
+    vertice = vDestino
+    while vertice != -1:
+        caminho.insert(0, vertice)
+        vertice = rota[vertice]
+
+    return caminho, custo[vDestino]
+
+def floydWarshall(matriz):
+    matrizCustos = matriz
+    tam = len(matriz)
+
+    for i in range(tam):
+        for j in range(tam):
+            if matrizCustos[i][j] == -1:
+                matrizCustos[i][j] = math.inf
+    
+    for k in range(tam):
+        for i in range(tam):
+            for j in range(tam):
+                matrizCustos[i][j] = min(matrizCustos[i][j], matrizCustos[i][k] + matrizCustos[k][j])
+
+    for i in range(tam):
+        for j in range(tam):
+            if matrizCustos[i][j] == math.inf:
+                matrizCustos[i][j] = -1
+
+    return matrizCustos
