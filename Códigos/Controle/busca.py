@@ -40,25 +40,25 @@ def DFS_recursivo(listaAdj, inicio, analisado):
 def DFSi(listaAdj, inicio):
     analisado = []
     aux = []    #pilha de vértices
-    tamanhoLista = len(listaAdj)
+    numVerticesanhoLista = len(listaAdj)
     conti = 0
     cont = 0
 
     aux.append(inicio)
 
-    while len(analisado) < tamanhoLista:    #deve analisar todos os vértices
+    while len(analisado) < numVerticesanhoLista:    #deve analisar todos os vértices
         while len(aux) - conti >= 0:
             if inicio not in analisado: #marca o vértice como analisado caso não tenha sido marcado ainda
                 analisado.append(inicio)
 
-            for i in range(tamanhoLista):   #varre todos os valores possíveis para serem adjacentes de um vértice
+            for i in range(numVerticesanhoLista):   #varre todos os valores possíveis para serem adjacentes de um vértice
                 if i in listaAdj[inicio] and i not in analisado:    #o número é adjacente e não foi analisado
                     inicio = i  #pula para o próximo vértice
                     analisado.append(i)
                     aux.append(i)
                     conti = 0
                     break
-                elif i == tamanhoLista - 1: #caso seja o último elemento possível e nada foi feito ainda
+                elif i == numVerticesanhoLista - 1: #caso seja o último elemento possível e nada foi feito ainda
                     conti += 1
                     if len(aux) - conti >= 0:
                         inicio = aux[len(aux) - conti]
@@ -99,12 +99,12 @@ def visitaDFS(vertice, listaAdj, cor, tipoAresta, tempoD, tempoT, tempo, classif
     ordenacaoTop.append(vertice)
 
 def dijkstra(matriz, vOrigem, vDestino):
-    num_vertices = len(matriz)
-    custo = [math.inf] * num_vertices
-    rota = [-1] * num_vertices
+    numVertices = len(matriz)
+    custo = [math.inf] * numVertices
+    rota = [-1] * numVertices
     custo[vOrigem] = 0
 
-    verAbertos = set(range(num_vertices))
+    verAbertos = set(range(numVertices))
     verFechados = set()
 
     while verAbertos:
@@ -115,7 +115,7 @@ def dijkstra(matriz, vOrigem, vDestino):
         if v == vDestino:
             break
 
-        for j in range(num_vertices):
+        for j in range(numVertices):
             if j not in verFechados and matriz[v][j] != -1:
                 aresta = matriz[v][j]
                 dist = custo[v] + aresta
@@ -132,22 +132,22 @@ def dijkstra(matriz, vOrigem, vDestino):
     return caminho, custo[vDestino]
 
 def bellmanFord(matriz, vOrigem, vDestino):
-    tam = len(matriz)
-    custo = [math.inf] * tam
+    numVertices = len(matriz)
+    custo = [math.inf] * numVertices
     custo[vOrigem] = 0
-    rota = [-1] * tam
+    rota = [-1] * numVertices
 
-    for _ in range(tam - 1):
-        for v in range(tam):
-            for u in range(tam):
+    for _ in range(numVertices - 1):
+        for v in range(numVertices):
+            for u in range(numVertices):
                 if matriz[v][u] != -1:
                     wvu = matriz[v][u]
                     if custo[v] + wvu < custo[u]:
                         custo[u] = custo[v] + wvu
                         rota[u] = v
 
-    for v in range(tam):
-        for u in range(tam):
+    for v in range(numVertices):
+        for u in range(numVertices):
             if matriz[v][u] != -1:
                 wvu = matriz[v][u]
                 if custo[v] + wvu < custo[u]:
@@ -163,20 +163,20 @@ def bellmanFord(matriz, vOrigem, vDestino):
 
 def floydWarshall(matriz):
     matrizCustos = matriz
-    tam = len(matriz)
+    numVertices = len(matriz)
 
-    for i in range(tam):
-        for j in range(tam):
+    for i in range(numVertices):
+        for j in range(numVertices):
             if matrizCustos[i][j] == -1:
                 matrizCustos[i][j] = math.inf
     
-    for k in range(tam):
-        for i in range(tam):
-            for j in range(tam):
+    for k in range(numVertices):
+        for i in range(numVertices):
+            for j in range(numVertices):
                 matrizCustos[i][j] = min(matrizCustos[i][j], matrizCustos[i][k] + matrizCustos[k][j])
 
-    for i in range(tam):
-        for j in range(tam):
+    for i in range(numVertices):
+        for j in range(numVertices):
             if matrizCustos[i][j] == math.inf:
                 matrizCustos[i][j] = -1
 
