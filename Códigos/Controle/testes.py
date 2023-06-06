@@ -211,7 +211,6 @@ def kruskal(matriz):
     custoTotal = 0
     listaArestas = []
     arestasAGM = []
-    matrizAGM = [[0 for _ in range(numVertices)] for _ in range(numVertices)]
 
     for i in range(numVertices):
         for j in range(i + 1, numVertices):
@@ -228,7 +227,6 @@ def kruskal(matriz):
 
         if raiz1 != raiz2:
             arestasAGM.append((aresta[0], aresta[1]))
-            matrizAGM[aresta[0]][aresta[1]] = 1
             union(pai, raiz1, raiz2)
             custoTotal += aresta[2]
 
