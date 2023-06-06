@@ -24,8 +24,6 @@ def tipoGrafo(matriz1):
     else:
         result = flagM + flagS
 
-    #print(result)
-
     return result
 
 def tipoGrafoLista(listaAdj):
@@ -50,8 +48,6 @@ def tipoGrafoLista(listaAdj):
     else:
         result = flagM + flagS
 
-    #print(result)
-
     return result
 
 def verificaAdjacencia(matriz, vi, vj):
@@ -60,16 +56,12 @@ def verificaAdjacencia(matriz, vi, vj):
     else:
         result = False
 
-    #print(result)
-
     return result
 
 def verificaAdjacenciaLista(listaAdj, vi, vj):
     if vj in listaAdj[vi] or vi in listaAdj[vj]:
-        #print(True)
         return True
     else:
-        #print(False)
         return False
     
 def caminhoEuleriano(matriz):
@@ -88,8 +80,6 @@ def caminhoEuleriano(matriz):
         ret = False
     else:
         ret = True
-
-    #print(ret)
 
     return ret
 
@@ -137,8 +127,6 @@ def temposVertices(listaAdj, inicio = None):
     for vertice in listaAdj:
         listaTempo[vertice] = str(tempoD[vertice]) + '/' + str(tempoT[vertice])
 
-    print(listaTempo)
-
     return tempoD, tempoT
 
 def verificaDAG(listaAdj):
@@ -158,7 +146,7 @@ def verificaDAG(listaAdj):
     for linha in tipoAresta:
         if 'Back' in linha:
             return False
-
+        
     return True
 
 def ordenacaoTopologica(listaAdj):
@@ -191,7 +179,6 @@ def prim(matriz):
 
     while len(arestasAGM) < numVertices - 1:
         custo = math.inf
-        adj = None
 
         for u in verSelec:
             for v in verNaoSelec:
