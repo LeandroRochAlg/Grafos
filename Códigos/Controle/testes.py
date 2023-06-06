@@ -1,5 +1,6 @@
 import numpy as np
 import busca as bs
+import math
 
 def tipoGrafo(matriz1):
     flagS = 0
@@ -179,3 +180,30 @@ def ordenacaoTopologica(listaAdj):
     ordenacaoTop = ordenacaoTop[::-1]   #inverte
 
     return ordenacaoTop
+
+def prim(matriz):
+    numVertices = len(matriz)
+    custoTotal = 0
+    vertice = 0
+    verSelec = []
+    verNaoSelec = [i for i in range(1, numVertices)]
+    arestasAGM = []
+
+    verSelec.append(vertice)
+
+    while len(arestasAGM) < numVertices - 1:
+        custo = math.inf
+        adj = None
+
+        for u in verSelec:
+            for v in verNaoSelec:
+                if matriz[u][v] != 0 and matriz[u][v] < custo:
+                    custo = matriz[u][v]
+                    aresta = (u, v)
+
+        verSelec.append(aresta[1])
+        verNaoSelec.remove(aresta[1])
+        arestasAGM.append(aresta)
+        custoTotal += custo
+
+    return arestasAGM, custoTotal
