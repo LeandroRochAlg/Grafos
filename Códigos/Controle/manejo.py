@@ -3,8 +3,6 @@ import numpy as np
 def insereAresta(matriz, vi, vj):
     matriz[vi][vj] += 1
     matriz[vj][vi] += 1
-
-    print(matriz)
     
     return matriz
 
@@ -14,9 +12,7 @@ def insereArestaLista(lista, vi, vj):
 
     lista[vj].append(vi)
     lista[vj].sort()
-
-    print(lista)
-
+    
     return lista
 
 def insereVertice(matriz):
@@ -30,8 +26,6 @@ def insereVertice(matriz):
         linha.append(0)
 
     matrizNp = np.array(matriz)
-
-    print(matrizNp)
     
     return matrizNp
 
@@ -40,16 +34,12 @@ def insereVerticeLista(lista):
         if i == len(lista)-1:
             lista[i+1] = []
             break
-
-    print(lista)
-
+        
     return lista
 
 def removeAresta(matriz, vi, vj):
     matriz[vi][vj] = 0
     matriz[vj][vi] = 0
-
-    print(matriz)
     
     return matriz
 
@@ -68,8 +58,6 @@ def removeArestaLista(lista, vi, vj):
             break
 
 
-    print(lista)
-
     return lista
 
 def removeVertice(matriz, v):
@@ -79,9 +67,7 @@ def removeVertice(matriz, v):
                 matriz[i][j] = -1
 
     matrizNp = np.array(matriz)
-
-    print(matrizNp)
-    
+        
     return matrizNp
 
 def removeVerticeLista(lista, v):
@@ -94,7 +80,5 @@ def removeVerticeLista(lista, v):
                 while i<len(listaV) and listaV[i] == v:
                     lista[j].pop(i)
                 break
-
-    print(lista)
-
+            
     return lista
