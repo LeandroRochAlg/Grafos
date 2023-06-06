@@ -1,7 +1,7 @@
 import numpy as np
 
 def criarMatrizArquivo(instancia):
-    with open('Grafos/Arquivos/Instâncias/' + instancia + '.txt', 'rb') as f:
+    with open('C:/Users/rocha/Documents/Unifei/Algoritmos em Grafos/Grafos/Instâncias/' + instancia + '.txt', 'rb') as f:
         matriz = np.genfromtxt(f, dtype="int64") #Leitura do arquivo e armazenamento em uma matriz numpy
     return matriz
 
@@ -18,8 +18,6 @@ def criaListaAdjacencias(matriz1):
                 listaAdj[i].append(j)
                 num -= 1
 
-    #print(listaAdj)
-
     return listaAdj
 
 def warshall(matriz):
@@ -33,7 +31,5 @@ def warshall(matriz):
                     matrizAlc[i][j] = 1
                 else:
                     matrizAlc[i][j] = matrizAlc[i][j]
-
-    #print(matrizAlc)
 
     return matrizAlc
