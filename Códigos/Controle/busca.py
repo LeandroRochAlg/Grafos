@@ -123,6 +123,14 @@ def dijkstra(matriz, vOrigem, vDestino):
                     custo[j] = dist
                     rota[j] = v
 
+        for j in range(numVertices):
+            if j not in verFechados and matriz[j][v] != -1:
+                aresta = matriz[j][v]
+                dist = custo[v] + aresta
+                if dist < custo[j]:
+                    custo[j] = dist
+                    rota[j] = v
+
     caminho = []
     atual = vDestino
     while atual != -1:
@@ -130,7 +138,6 @@ def dijkstra(matriz, vOrigem, vDestino):
         atual = rota[atual]
 
     return caminho, custo[vDestino]
-
 def bellmanFord(matriz, vOrigem, vDestino):
     numVertices = len(matriz)
     custo = [math.inf] * numVertices
